@@ -3,50 +3,20 @@ import {
   Banner,
   ImageSlider,
   Preloader,
-  Tabs,
   Title,
 } from "../../components/common/index";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectAllGames,
-  selectAllGamesStatus,
-} from "../../redux/store/gameSlice";
 import { useEffect } from "react";
-import { fetchAsyncGames } from "../../redux/utils/gameUtils";
 import { STATUS } from "../../utils/status";
-import { GameList } from "../../components/game/index";
 import { Link } from "react-router-dom";
 import { join_image, store_image } from "../../utils/images";
-import {
-  selectAllGenres,
-  selectAllGenresStatus,
-} from "../../redux/store/genreSlice";
-import { fetchAsyncGenres } from "../../redux/utils/genreUtils";
-import {
-  selectAllStores,
-  selectAllStoresStatus,
-} from "../../redux/store/storeSlice";
 import { StoreList } from "../../components/store/index";
-import { fetchAsyncStores } from "../../redux/utils/storeUtils";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const games = useSelector(selectAllGames);
-  const gamesStatus = useSelector(selectAllGamesStatus);
-  const genres = useSelector(selectAllGenres);
-  const genresStatus = useSelector(selectAllGenresStatus);
-  const stores = useSelector(selectAllStores);
-  const storesStatus = useSelector(selectAllStoresStatus);
-
-  useEffect(() => {
-    dispatch(fetchAsyncGames());
-    dispatch(fetchAsyncGenres());
-    dispatch(fetchAsyncStores());
-  }, []);
 
   const renderedPopularGames = (
     <>
-      <GameList sliceValue={9} games={games} />
       <div className="d-flex justify-content-center">
         <Link to="/games" className="section-btn">
           see more games
@@ -58,22 +28,6 @@ const HomePage = () => {
   return (
     <HomeWrapper>
       <Banner />
-
-      <section className="section sc-popular">
-        <div className="container">
-          <Title
-            titleName={{ firstText: "top popular", secondText: "games" }}
-          />
-          {gamesStatus === STATUS.LOADING ? (
-            <Preloader />
-          ) : games?.length > 0 ? (
-            renderedPopularGames
-          ) : (
-            "No games found!"
-          )}
-        </div>
-      </section>
-
       <ImageSlider />
 
       <section
@@ -96,47 +50,6 @@ const HomePage = () => {
               join discord
             </button>
           </div>
-        </div>
-      </section>
-
-      <section className="section sc-genres">
-        <div className="container">
-          <Title
-            titleName={{
-              firstText: "top",
-              secondText: "genres",
-            }}
-          />
-        </div>
-        {genresStatus === STATUS.LOADING ? (
-          <Preloader />
-        ) : genres?.length > 0 ? (
-          <Tabs sliceValue={9} data={genres} />
-        ) : (
-          "No genres found!"
-        )}
-      </section>
-
-      <section
-        className="section sc-stores"
-        style={{
-          background: `linear-gradient(180deg, rgba(12, 10, 36, 0.73) 0%, rgba(0, 0, 0, 0.73) 72.92%), url(${store_image}) center/cover no-repeat`,
-        }}
-      >
-        <div className="container">
-          <Title
-            titleName={{
-              firstText: "our",
-              secondText: "game stores",
-            }}
-          />
-          {storesStatus === STATUS.LOADING ? (
-            <Preloader />
-          ) : stores?.length > 0 ? (
-            <StoreList stores={stores} />
-          ) : (
-            "No stores found!"
-          )}
         </div>
       </section>
     </HomeWrapper>

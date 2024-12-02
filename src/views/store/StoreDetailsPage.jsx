@@ -1,18 +1,13 @@
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSingleStore, selectSingleStoreStatus } from '../../redux/store/storeSlice';
 import { useEffect } from 'react';
-import { fetchAsyncStoresDetails } from '../../redux/utils/storeUtils';
 import { Breadcrumb, Preloader } from "../../components/common/index";
 import { STATUS } from '../../utils/status';
 import { StoreDetails } from '../../components/store';
 
 const StoreDetailsPage = () => {
-    const { storeId } = useParams();
+
     const dispatch = useDispatch();
-    const singleStoreData = useSelector(selectSingleStore);
-    const singleStoreStatus = useSelector(selectSingleStoreStatus);
 
     useEffect(() => {
         dispatch(fetchAsyncStoresDetails(storeId));

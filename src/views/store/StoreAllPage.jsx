@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { selectAllStores, selectAllStoresStatus } from '../../redux/store/storeSlice';
 import { useEffect } from 'react';
-import { fetchAsyncStores } from '../../redux/utils/storeUtils';
 import { Preloader, Title } from '../../components/common';
 import { STATUS } from '../../utils/status';
 import { StoreList } from '../../components/store';
