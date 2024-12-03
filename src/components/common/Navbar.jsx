@@ -5,7 +5,7 @@ import { BsRssFill, BsSteam, BsTwitch, BsYoutube} from "react-icons/bs";
 import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSidebarStatus, setSidebarOff, setSidebarOn } from '../../redux/store/sidebarSlice';
-
+import logo from "../../assets/images/logo.png";
 const Navbar = () => {
   const dispatch = useDispatch();
   const sidebarStatus = useSelector(selectSidebarStatus);
@@ -15,7 +15,9 @@ const Navbar = () => {
       <div className='container w-100'>
         <div className='navbar-content'>
           <div className='brand-and-toggler d-flex align-items-center justify-content-between'>
-            <Link to = "/" className="navbar-brand text-white text-uppercase no-wrap">ctrl <span>play</span></Link>
+            <Link to = "/" className="navbar-brand text-white text-uppercase no-wrap">
+            <img src = {logo} alt = "logo" className = "w-24 h-24" />
+            </Link>
             <button type='button' className='navbar-show-btn text-white' onClick={() => dispatch(setSidebarOn())}>
               <HiOutlineMenuAlt3 size = { 25 } />
             </button>
@@ -28,10 +30,14 @@ const Navbar = () => {
 
             <ul className='navbar-nav'>
               <li className='nav-item'>
-                <Link to = "/" className='nav-link'>home</Link>
+                <Link to = "/" className='nav-link text-yellow-[##FFEA00]'>home</Link>
               </li>
               <li className='nav-item'>
                 <Link to = "/games" className='nav-link'>games</Link>
+              </li>
+
+              <li className='nav-item'>
+                <Link to = "/LEDERBOARDS" className='nav-link'>leaderboards</Link>
               </li>
             </ul>
           </div>
@@ -45,7 +51,7 @@ export default Navbar;
 
 const NavbarWrapper = styled.div`
   min-height: 60px;
-  background: #090624;
+  background: #00060A;
 
   .navbar-brand{
     font-weight: 700;

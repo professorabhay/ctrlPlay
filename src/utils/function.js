@@ -1,5 +1,5 @@
 import { message, results, connect, result } from "@permaweb/aoconnect";
-import { createDataItemSigner as nodeCDIS} from "@permaweb/aoconnect";
+import { createDataItemSigner } from "@permaweb/aoconnect/node";
 
 // const ao = connect();
 export const PROCESS_ID = "4T8COHVsKeuOa7zgMN8Jy9LhdZxr0MRMPMhP4Ml_JZY";
@@ -16,40 +16,45 @@ export function parseCustomJson(str) {
   }
 }
 
-export async function createPulseProfile(username, fullName, profilePic, arweaveWalletWindow) {
-    try {
-      // First, send the message
+export async function createPulseProfile(
+  username,
+  fullName,
+  profilePic,
+  arweaveWalletWindow
+) {
+  try {
+    // First, send the message
 
-      console.log("creating pulse profile")
-  
-      console.log(username, fullName, profilePic)
-      const resultsOut = await message({
-        process: PULSE_ID,
-        tags: [
-          { name: "username", value: username },
-          { name: "name", value: fullName },
-          { name: "profile_picture_url", value: profilePic },
-  
-          { name: "Action", value: "UPDATE_PROFILE" },
-        ],
-        signer: nodeCDIS(arweaveWalletWindow),
-        data: "",
-      });
-  
-      let { Messages, Spawns, Output, Error } = await result({
-        // the arweave TXID of the message
-        message: resultsOut,
-        // the arweave TXID of the process
-        process: "jdRZd9pgFUIS45sO3_g-cihGA6IwaIURWBMQSZozfP0",
-      });
-  
-      console.log(Messages, Spawns, Output, Error);
-      const dataTemp = Messages[0].Data;
-      console.log(dataTemp);
-      const parsedJsonData = parseCustomJson(dataTemp);
-      return parsedJsonData;
-    } catch (error) {
-      console.error("Error in createPulseProfile:", error);
-      throw error; // Re-throw the error so the caller can handle it
-    }
+    console.log("creating pulse profile");
+
+    console.log(username, fullName, profilePic);
+    const resultsOut = await message({
+      process: PULSE_ID,
+      tags: [
+        { name: "username", value: username },
+        { name: "name", value: fullName },
+        { name: "profile_picture_url", value: profilePic },
+
+        { name: "Action", value: "UPDATE_PROFILE" },
+      ],
+      signer: createDataItemSigner(arweaveWalletWindow),
+      data: "",
+    });
+
+    let { Messages, Spawns, Output, Error } = await result({
+      // the arweave TXID of the message
+      message: resultsOut,
+      // the arweave TXID of the process
+      process: "jdRZd9pgFUIS45sO3_g-cihGA6IwaIURWBMQSZozfP0",
+    });
+
+    console.log(Messages, Spawns, Output, Error);
+    const dataTemp = Messages[0].Data;
+    console.log(dataTemp);
+    const parsedJsonData = parseCustomJson(dataTemp);
+    return parsedJsonData;
+  } catch (error) {
+    console.error("Error in createPulseProfile:", error);
+    throw error; // Re-throw the error so the caller can handle it
   }
+}
