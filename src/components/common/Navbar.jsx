@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className='container w-100'>
         <div className='navbar-content'>
           <div className='brand-and-toggler d-flex align-items-center justify-content-between'>
-            <Link to = "/" className="navbar-brand text-white text-uppercase no-wrap">cool <span>games</span></Link>
+            <Link to = "/" className="navbar-brand text-white text-uppercase no-wrap">ctrl <span>play</span></Link>
             <button type='button' className='navbar-show-btn text-white' onClick={() => dispatch(setSidebarOn())}>
               <HiOutlineMenuAlt3 size = { 25 } />
             </button>
@@ -31,37 +31,7 @@ const Navbar = () => {
                 <Link to = "/" className='nav-link'>home</Link>
               </li>
               <li className='nav-item'>
-                <Link to = "/creators" className='nav-link'>creators</Link>
-              </li>
-              <li className='nav-item'>
-                <Link to = "/stores" className='nav-link'>stores</Link>
-              </li>
-              <li className='nav-item'>
                 <Link to = "/games" className='nav-link'>games</Link>
-              </li>
-            </ul>
-
-            <ul className='connect-list d-flex justify-content-center align-items-center mt-5 flex-wrap'>
-              <li className='text-uppercase fw-7 w-100 connect-text mb-2'>connect</li>
-              <li className='connect-item'>
-                <Link to = "/" className='connect-link'>
-                  <BsRssFill />
-                </Link>
-              </li>
-              <li className='connect-item'>
-                <Link to = "/" className='connect-link'>
-                  <BsSteam size = { 18 } />
-                </Link>
-              </li>
-              <li className='connect-item'>
-                <Link to = "/" className='connect-link'>
-                  <BsTwitch size = { 18 } />
-                </Link>
-              </li>
-              <li className='connect-item'>
-                <Link to = "/" className='connect-link'>
-                  <BsYoutube size = { 19 } />
-                </Link>
               </li>
             </ul>
           </div>
@@ -74,7 +44,7 @@ const Navbar = () => {
 export default Navbar;
 
 const NavbarWrapper = styled.div`
-  min-height: 78px;
+  min-height: 60px;
   background: #090624;
 
   .navbar-brand{
